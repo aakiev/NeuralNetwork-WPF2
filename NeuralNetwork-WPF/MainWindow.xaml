@@ -5,32 +5,56 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:NeuralNetwork_WPF"
         mc:Ignorable="d"
-        Title="MainWindow" Height="650" Width="1000">
+        Title="MainWindow" Height="700" Width="1000">
+    
     <Grid>
         <Button x:Name="queryButton" Content="QueryButton" HorizontalAlignment="Left" Margin="854,489,0,0" VerticalAlignment="Top" Width="96" Click="queryButton_Click" Height="32"/>
-        <Button x:Name="trainButton" Content="TrainButton" HorizontalAlignment="Left" Margin="854,437,0,0" VerticalAlignment="Top" Width="96" Height="33"/>
+        <Button x:Name="trainButton" Content="TrainButton" HorizontalAlignment="Left" Margin="854,437,0,0" VerticalAlignment="Top" Width="96" Height="33" Click="trainButton_Click"/>
         <Button x:Name="createButton" Content="CreateButton" HorizontalAlignment="Left" Margin="854,388,0,0" VerticalAlignment="Top" Width="96" Click="createButton_Click" Height="32"/>
         <TextBox x:Name="outputTextBox" HorizontalAlignment="Left" Height="23" Margin="862,264,0,0" TextWrapping="Wrap" Text="3" VerticalAlignment="Top" Width="75" PreviewTextInput="outputTextBox_PreviewTextInput"/>
         <TextBox x:Name="hiddenTextBox" HorizontalAlignment="Left" Height="23" Margin="862,214,0,0" TextWrapping="Wrap" Text="3" VerticalAlignment="Top" Width="75" PreviewTextInput="hiddenTextBox_PreviewTextInput"/>
         <TextBox x:Name="inputTextBox" HorizontalAlignment="Left" Height="23" Margin="862,164,0,0" TextWrapping="Wrap" Text="3" VerticalAlignment="Top" Width="75" PreviewTextInput="inputTextBox_PreviewTextInput"/>
-        <TextBox x:Name="TextBox_LearningRate" HorizontalAlignment="Left" Height="23" Margin="862,114,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="75"/>
-        <DataGrid x:Name="networkDataGrid" CanUserAddRows ="True" ItemsSource="{Binding newRow}" HorizontalAlignment="Left" Height="550" Margin="10,10,0,0" VerticalAlignment="Top" Width="800">
+        <TextBox x:Name="TextBox_LearningRate" HorizontalAlignment="Left" Height="23" Margin="862,114,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="75" Text="0.1"/>
+
+        <DataGrid x:Name="networkDataGrid" 
+          CanUserAddRows="True" 
+          ItemsSource="{Binding newRow}" 
+          HorizontalAlignment="Left" 
+          Height="305" 
+          Margin="10,10,0,0" 
+          VerticalAlignment="Top" 
+          Width="800" 
+          AutoGenerateColumns="False">
             <DataGrid.Columns>
-                <DataGridTextColumn Header="InputLayer" Binding="{Binding inputValue}"/>
-                <DataGridTextColumn Header="WeightsI-H" Binding="{Binding weightsIH}"/>
-                <DataGridTextColumn Header="InputHidden" Binding="{Binding inputHidden}"/>
-                <DataGridTextColumn Header="OutputHidden" Binding="{Binding outputHidden}"/>
-                <DataGridTextColumn Header="WeightsH-O" Binding="{Binding weightsHO}"/>
-                <DataGridTextColumn Header="ErrorHidden" Binding="{Binding errorHidden}"/>
-                <DataGridTextColumn Header="InputOutput" Binding="{Binding inputOutput}"/>
-                <DataGridTextColumn Header="OutputLayer" Binding="{Binding outputLayer}"/>
-                <DataGridTextColumn Header="Target" Binding="{Binding target}"/>
-                <DataGridTextColumn Header="ErrorOutput" Binding="{Binding errorOutput}"/>
+                <DataGridTextColumn Header="Input Layer" Binding="{Binding inputValue}" Width="*"/>
+                <DataGridTextColumn Header="Input - Hidden Layer" Binding="{Binding inputHidden}" Width="*"/>
+                <DataGridTextColumn Header="Output - Hidden Layer" Binding="{Binding outputHidden}" Width="*"/>
+                <DataGridTextColumn Header="Input - Output Layer" Binding="{Binding inputOutput}" Width="*"/>
+                <DataGridTextColumn Header="Output Layer" Binding="{Binding outputLayer}" Width="*"/>
             </DataGrid.Columns>
         </DataGrid>
+
         <Label Content="Learning Rate" HorizontalAlignment="Left" Margin="859,94,0,0" VerticalAlignment="Top" RenderTransformOrigin="-0.5,0.615"/>
         <Label Content="Input Nodes" HorizontalAlignment="Left" Margin="859,144,0,0" VerticalAlignment="Top" RenderTransformOrigin="-0.5,0.615"/>
         <Label Content="Hidden Nodes" HorizontalAlignment="Left" Margin="859,194,0,0" VerticalAlignment="Top" RenderTransformOrigin="-0.5,0.615"/>
         <Label Content="Output Nodes" HorizontalAlignment="Left" Margin="859,244,0,0" VerticalAlignment="Top" RenderTransformOrigin="-0.5,0.615"/>
+        
+        <DataGrid x:Name="networkDataGrid_2" 
+            CanUserAddRows="True" 
+            ItemsSource="{Binding newRow}" 
+            HorizontalAlignment="Left" 
+            Height="305" 
+            Margin="10,327,0,0" 
+            VerticalAlignment="Top" 
+            Width="800" 
+            AutoGenerateColumns="False">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Weights Input-Hidden" Binding="{Binding weightsIH}" Width="*"/>
+                <DataGridTextColumn Header="Weights Hidden-Output" Binding="{Binding weightsHO}" Width="*"/>
+                <DataGridTextColumn Header="Error - Hidden" Binding="{Binding errorHidden}" Width="*"/>
+                <DataGridTextColumn Header="Error - Output" Binding="{Binding errorOutput}" Width="*"/>
+                <DataGridTextColumn Header="Target" Binding="{Binding target}" Width="*"/>
+            </DataGrid.Columns>
+        </DataGrid>
     </Grid>
 </Window>

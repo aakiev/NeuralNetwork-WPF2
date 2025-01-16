@@ -32,5 +32,43 @@ namespace NeuralNetwork_WPF
             }
             return outputs;
         }
+
+        // Quadratischer-Fehler Funktion des Outputlayer
+        public double[] CalculateOutputErrors(double[] targets, double[] outputs)
+        {
+            double[] errors = new double[targets.Length];
+            for (int i = 0; i < targets.Length; i++)
+            {
+                errors[i] = Math.Pow(targets[i] - outputs[i], 2);
+            }
+            return errors;
+
+        }
+
+        // Fehler-Funktion für den Hidden Layer
+        public double[] CalculateHiddenError(double[,] weights, double[] errorOutput)
+        {
+            int rows = weights.GetLength(0); // Anzahl der Neuronen in der Hidden-Schicht
+            int cols = weights.GetLength(1); // Anzahl der Neuronen in der Output-Schicht
+
+            if (cols != errorOutput.Length)
+            {
+                throw new ArgumentException("Die Anzahl der Spalten der Gewichtsmatrix muss der Länge des Fehlervektors entsprechen.");
+            }
+
+            double[] errorHidden = new double[rows];
+
+            for (int i = 0; i < rows; i++)
+            {
+                errorHidden[i] = 0.0;
+                for (int j = 0; j < cols; j++)
+                {
+                    errorHidden[i] += weights[i, j] * errorOutput[j];
+                }
+            }
+
+            return errorHidden;
+
+        }
     }
 }

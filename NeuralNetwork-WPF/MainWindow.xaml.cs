@@ -18,8 +18,14 @@ namespace NeuralNetwork_WPF
     public partial class MainWindow : Window
     {
         int inodes = 3, hnodes = 3, onodes = 3;
+        double learningRate = 10;   //0.1 wäre echt langsam
         nn3S nn3SO;
+        nnMath nnMathO = new nnMath();
+
         double[] inputs;
+        double[] targets;
+        double[] errorsOutput;
+        double[] errorsHidden;
 
         public MainWindow()
         {
@@ -41,6 +47,37 @@ namespace NeuralNetwork_WPF
             e.Handled = !int.TryParse(e.Text, out int onodes);
         }
 
+        private void trainButton_Click(object sender, RoutedEventArgs e)
+        {
+            if (nn3SO == null)
+            {
+                MessageBox.Show("Bitte erstellen Sie zuerst ein neuronales Netz!", "Fehler", MessageBoxButton.OK, MessageBoxImage.Warning);
+                return;
+            }
+
+            inputs = new double[inodes];
+            targets = new double[onodes];
+
+            inputs[0] = 0.9;
+            inputs[1] = 0.1;
+            inputs[2] = 0.8;
+
+            targets[0] = 0.9;
+            targets[1] = 0.9;
+            targets[2] = 0.9;
+
+            // Training durchführen
+            nn3SO.Train(inputs, targets, learningRate);
+
+            // Netzwerk erneut abfragen, um die aktualisierten Werte zu sehen
+            nn3SO.queryNN(inputs);
+            errorsOutput = nnMathO.CalculateOutputErrors(targets, nn3SO.Final_outputs);
+            errorsHidden = nnMathO.CalculateHiddenError(nn3SO.Wih, errorsOutput);
+
+            DisplayResults();
+        }
+
+
         private void createButton_Click(object sender, RoutedEventArgs e)
         {
             if ((inodes > 1) && (hnodes > 1) && (onodes > 1))
@@ -49,33 +86,65 @@ namespace NeuralNetwork_WPF
 
         private void queryButton_Click(object sender, RoutedEventArgs e)
         {
-            int i, j, k;
+
+            if (nn3SO == null)
+            {
+                MessageBox.Show("Bitte erstellen Sie zuerst ein neuronales Netz!", "Fehler", MessageBoxButton.OK, MessageBoxImage.Warning);
+                return;
+            }
+
             inputs = new double[inodes];
+            targets = new double[onodes];
 
             inputs[0] = 0.9;
             inputs[1] = 0.1;
             inputs[2] = 0.8;
 
-            nn3SO.queryNN(inputs);
+            targets[0] = 0.9;
+            targets[1] = 0.9;
+            targets[2] = 0.9;
 
-            for (i = 0; i < inputs.Length; i++)
+            nn3SO.queryNN(inputs);
+            errorsOutput = nnMathO.CalculateOutputErrors(targets, nn3SO.Final_outputs);
+            errorsHidden = nnMathO.CalculateHiddenError(nn3SO.Wih, errorsOutput);
+
+            DisplayResults();
+        }
+        private void DisplayResults()
+        {
+            // Ergebnisse anzeigen
+            networkDataGrid.Items.Clear();
+            networkDataGrid_2.Items.Clear();
+
+            for (int i = 0; i < inputs.Length; i++)
             {
+                // Gewichtsinformationen für die aktuelle Zeile 
+                string weightsIHForNeuron = String.Join(" | ", Enumerable.Range(0, nn3SO.Wih.GetLength(1))
+                    .Select(j => nn3SO.Wih[i, j].ToString("F2")));
+
+                string weightsHOForNeuron = String.Join(" | ", Enumerable.Range(0, nn3SO.Who.GetLength(1))
+                    .Select(j => nn3SO.Who[i, j].ToString("F2")));
+
                 var data = new nodeRow
                 {
-                    inputValue = inputs[i].ToString(),
-                    //weightsIH = "0",
-                    inputHidden = String.Format(" {0:0.##} ", nn3SO.Hidden_inputs[i]),
-                    outputHidden = String.Format(" {0:0.##} ", nn3SO.Hidden_outputs[i]),
-                    //weightsHO = "0",
-                    //errorHidden = "0",
-                    inputOutput = String.Format(" {0:0.##} ", nn3SO.Final_inputs[i]),
-                    outputLayer = String.Format(" {0:0.##} ", nn3SO.Final_outputs[i]),
-                    //target = "0",
-                    //errorOutput = "0",
+                    inputValue = inputs[i].ToString("F2"),
+                    weightsIH = weightsIHForNeuron, 
+                    inputHidden = nn3SO.Hidden_inputs[i].ToString("F2"),
+                    outputHidden = nn3SO.Hidden_outputs[i].ToString("F2"),
+                    weightsHO = weightsHOForNeuron, 
+                    errorHidden = errorsHidden[i].ToString("F3"),
+                    inputOutput = nn3SO.Final_inputs[i].ToString("F2"),
+                    outputLayer = nn3SO.Final_outputs[i].ToString("F2"),
+                    target = targets[i].ToString("F2"),
+                    errorOutput = errorsOutput[i].ToString("F3"),
                 };
-                
+
                 networkDataGrid.Items.Add(data);
+                networkDataGrid_2.Items.Add(data);
             }
         }
+
+
+
     }
 }
