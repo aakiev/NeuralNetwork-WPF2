@@ -18,7 +18,7 @@ namespace NeuralNetwork_WPF
     public partial class MainWindow : Window
     {
         int inodes = 3, hnodes = 3, onodes = 3;
-        double learningRate = 10;   //0.1 wäre echt langsam
+        double learningRate = 0.1;
         nn3S nn3SO;
         nnMath nnMathO = new nnMath();
 
@@ -47,6 +47,48 @@ namespace NeuralNetwork_WPF
             e.Handled = !int.TryParse(e.Text, out int onodes);
         }
 
+        private void TextBox_LearningRate_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            if (double.TryParse(((TextBox)sender).Text, System.Globalization.NumberStyles.AllowDecimalPoint, System.Globalization.CultureInfo.InvariantCulture, out double newLearningRate))
+            {
+                learningRate = newLearningRate;
+            }
+        }
+
+
+        private void TextBox_LearningRate_PreviewTextInput(object sender, TextCompositionEventArgs e)
+        {
+            // Erlaubt nur Zahlen und maximal einen Dezimalpunkt
+            e.Handled = !IsValidLearningRateInput(e.Text, ((TextBox)sender).Text);
+        }
+
+        // Validierungsmethode
+        private bool IsValidLearningRateInput(string newText, string currentText)
+        {
+            // Erlaubt nur Zahlen und einen Dezimalpunkt
+            string combinedText = currentText + newText;
+            return double.TryParse(combinedText, System.Globalization.NumberStyles.AllowDecimalPoint, System.Globalization.CultureInfo.InvariantCulture, out _);
+        }
+
+        private void TextBox_LearningRate_LostFocus(object sender, RoutedEventArgs e)
+        {
+            TextBox textBox = sender as TextBox;
+            if (textBox.Text == "") // Überprüft, ob das Textfeld leer ist
+            {
+                textBox.Text = "0.1"; // Platzhaltertext setzen
+            }
+        }
+
+        private void TextBox_LearningRate_GotFocus(object sender, RoutedEventArgs e)
+        {
+            TextBox textBox = sender as TextBox;
+            textBox.Text = ""; 
+        }
+        private void createButton_Click(object sender, RoutedEventArgs e)
+        {
+            if ((inodes > 1) && (hnodes > 1) && (onodes > 1))
+                nn3SO = new nn3S(inodes, hnodes, onodes);
+        }
         private void trainButton_Click(object sender, RoutedEventArgs e)
         {
             if (nn3SO == null)
@@ -75,13 +117,6 @@ namespace NeuralNetwork_WPF
             errorsHidden = nnMathO.CalculateHiddenError(nn3SO.Wih, errorsOutput);
 
             DisplayResults();
-        }
-
-
-        private void createButton_Click(object sender, RoutedEventArgs e)
-        {
-            if ((inodes > 1) && (hnodes > 1) && (onodes > 1))
-                nn3SO = new nn3S(inodes, hnodes, onodes);
         }
 
         private void queryButton_Click(object sender, RoutedEventArgs e)

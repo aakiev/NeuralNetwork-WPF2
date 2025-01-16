@@ -11,10 +11,10 @@
         <Button x:Name="queryButton" Content="QueryButton" HorizontalAlignment="Left" Margin="854,489,0,0" VerticalAlignment="Top" Width="96" Click="queryButton_Click" Height="32"/>
         <Button x:Name="trainButton" Content="TrainButton" HorizontalAlignment="Left" Margin="854,437,0,0" VerticalAlignment="Top" Width="96" Height="33" Click="trainButton_Click"/>
         <Button x:Name="createButton" Content="CreateButton" HorizontalAlignment="Left" Margin="854,388,0,0" VerticalAlignment="Top" Width="96" Click="createButton_Click" Height="32"/>
-        <TextBox x:Name="outputTextBox" HorizontalAlignment="Left" Height="23" Margin="862,264,0,0" TextWrapping="Wrap" Text="3" VerticalAlignment="Top" Width="75" PreviewTextInput="outputTextBox_PreviewTextInput"/>
-        <TextBox x:Name="hiddenTextBox" HorizontalAlignment="Left" Height="23" Margin="862,214,0,0" TextWrapping="Wrap" Text="3" VerticalAlignment="Top" Width="75" PreviewTextInput="hiddenTextBox_PreviewTextInput"/>
-        <TextBox x:Name="inputTextBox" HorizontalAlignment="Left" Height="23" Margin="862,164,0,0" TextWrapping="Wrap" Text="3" VerticalAlignment="Top" Width="75" PreviewTextInput="inputTextBox_PreviewTextInput"/>
-        <TextBox x:Name="TextBox_LearningRate" HorizontalAlignment="Left" Height="23" Margin="862,114,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="75" Text="0.1"/>
+        <TextBox x:Name="outputTextBox" HorizontalAlignment="Left" Height="23" Margin="862,264,0,0" TextWrapping="Wrap" Text="3" VerticalAlignment="Top" Width="75" PreviewTextInput="outputTextBox_PreviewTextInput" IsEnabled="False"/>
+        <TextBox x:Name="hiddenTextBox" HorizontalAlignment="Left" Height="23" Margin="862,214,0,0" TextWrapping="Wrap" Text="3" VerticalAlignment="Top" Width="75" PreviewTextInput="hiddenTextBox_PreviewTextInput" IsEnabled="False"/>
+        <TextBox x:Name="inputTextBox" HorizontalAlignment="Left" Height="23" Margin="862,164,0,0" TextWrapping="Wrap" Text="3" VerticalAlignment="Top" Width="75" PreviewTextInput="inputTextBox_PreviewTextInput" IsEnabled="False"/>
+        <TextBox x:Name="TextBox_LearningRate" HorizontalAlignment="Left" Height="23" Margin="862,114,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="75" Text="0.1" TextChanged="TextBox_LearningRate_TextChanged" PreviewTextInput="TextBox_LearningRate_PreviewTextInput" LostFocus="TextBox_LearningRate_LostFocus" GotFocus="TextBox_LearningRate_GotFocus"/>
 
         <DataGrid x:Name="networkDataGrid" 
           CanUserAddRows="True" 
