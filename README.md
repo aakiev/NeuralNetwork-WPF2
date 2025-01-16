@@ -37,13 +37,12 @@ The neural network is designed to be modular and flexible, allowing for easy adj
 - .NET Framework installed on your machine
 
 ### Installation
-1. Clone the repository using the following command:<br><br>
+1. Clone the repository using the following command:
    
    ```bash
    git clone https://github.com/aakiev/NeuralNetwork-WPF.git
    ```
-   <br><br>
-2. Open the solution file (.sln) in Visual Studio.<br><br>
+2. Open the solution file (.sln) in Visual Studio.
    
 3. Build the solution and run the application.
 
