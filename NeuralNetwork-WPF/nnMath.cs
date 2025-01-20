@@ -33,13 +33,13 @@ namespace NeuralNetwork_WPF
             return outputs;
         }
 
-        // Quadratischer-Fehler Funktion des Outputlayer
+        // Einfache Differenz als Fehler-Funktion (Cost function)
         public double[] CalculateOutputErrors(double[] targets, double[] outputs)
         {
             double[] errors = new double[targets.Length];
             for (int i = 0; i < targets.Length; i++)
             {
-                errors[i] = Math.Pow(targets[i] - outputs[i], 2);
+                errors[i] = targets[i] - outputs[i];
             }
             return errors;
 

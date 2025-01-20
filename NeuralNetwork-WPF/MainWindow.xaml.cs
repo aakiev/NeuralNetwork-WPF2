@@ -104,9 +104,9 @@ namespace NeuralNetwork_WPF
             inputs[1] = 0.1;
             inputs[2] = 0.8;
 
-            targets[0] = 0.9;
+            targets[0] = 0.1;
             targets[1] = 0.9;
-            targets[2] = 0.9;
+            targets[2] = 0.01;
 
             // Training durchführen
             nn3SO.Train(inputs, targets, learningRate);
@@ -135,9 +135,9 @@ namespace NeuralNetwork_WPF
             inputs[1] = 0.1;
             inputs[2] = 0.8;
 
-            targets[0] = 0.9;
+            targets[0] = 0.1;
             targets[1] = 0.9;
-            targets[2] = 0.9;
+            targets[2] = 0.01;
 
             nn3SO.queryNN(inputs);
             errorsOutput = nnMathO.CalculateOutputErrors(targets, nn3SO.Final_outputs);
