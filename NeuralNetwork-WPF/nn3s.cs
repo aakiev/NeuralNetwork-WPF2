@@ -36,30 +36,6 @@ namespace NeuralNetwork_WPF
             wih = new double[inodes, hnodes];
             who = new double[hnodes, onodes];
 
-
-            wih[0, 0] = 0.9;    //Gewicht von Neuron 1 vom Inputlayer zu Neuron 1 vom Hiddenlayer
-            wih[1, 0] = 0.3;    //Gewicht von Neuron 2 vom Inputlayer zu Neuron 1 vom Hiddenlayer
-            wih[2, 0] = 0.4;    //Gewicht von Neuron 3 vom Inputlayer zu Neuron 1 vom Hiddenlayer
-            wih[0, 1] = 0.2;
-            wih[1, 1] = 0.8;
-            wih[2, 1] = 0.2;
-            wih[0, 2] = 0.1;
-            wih[1, 2] = 0.5;
-            wih[2, 2] = 0.6;
-            who[0, 0] = 0.3;
-            who[1, 0] = 0.7;
-            who[2, 0] = 0.5;
-            who[0, 1] = 0.6;
-            who[1, 1] = 0.5;
-            who[2, 1] = 0.2;
-            who[0, 2] = 0.8;
-            who[1, 2] = 0.1;
-            who[2, 2] = 0.9;
-
-
-
-            /*
-
             // Eine einzige Instanz von Random erzeugen
             Random random = new Random();
 
@@ -68,7 +44,7 @@ namespace NeuralNetwork_WPF
             {
                 for (int i = 0; i < inodes; i++)
                 {
-                    wih[i, j] = random.NextDouble() * 1.0 - 0.5; // Werte im Bereich [-0.5, 0.5]
+                    wih[i, j] = random.NextDouble() * 2.0 - 1.0; // Werte im Bereich [-1.0, 1.0]
                 }
             }
 
@@ -77,9 +53,9 @@ namespace NeuralNetwork_WPF
             {
                 for (int i = 0; i < hnodes; i++)
                 {
-                    who[i, j] = random.NextDouble() * 1.0 - 0.5; // Werte im Bereich [-0.5, 0.5]
+                    who[i, j] = random.NextDouble() * 2.0 - 1.0; // Werte im Bereich [-1.0, 1.0]
                 }
-            }*/
+            }
         }
 
 

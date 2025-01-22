@@ -104,7 +104,7 @@ namespace NeuralNetwork_WPF
             inputs[1] = 0.1;
             inputs[2] = 0.8;
 
-            targets[0] = 0.9; ;
+            targets[0] = 0.1;
             targets[1] = 0.9;
             targets[2] = 0.9;
 
@@ -135,7 +135,7 @@ namespace NeuralNetwork_WPF
             inputs[1] = 0.1;
             inputs[2] = 0.8;
 
-            targets[0] = 0.9;
+            targets[0] = 0.1;
             targets[1] = 0.9;
             targets[2] = 0.9;
 
