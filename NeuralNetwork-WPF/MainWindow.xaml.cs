@@ -23,6 +23,8 @@ namespace NeuralNetwork_WPF
         int inodes = 784, hnodes = 100, onodes = 10;
         int trainCount = 0, epoches = 1;
         double learningRate = 0.1;
+        int hiddenLayerCount;
+
         nn3S nn3SO;
         nnMath nnMathO = new nnMath();
 
@@ -87,14 +89,16 @@ namespace NeuralNetwork_WPF
         private void TextBox_LearningRate_GotFocus(object sender, RoutedEventArgs e)
         {
             TextBox textBox = sender as TextBox;
-            textBox.Text = ""; 
+            textBox.Text = "";
         }
         private void createButton_Click(object sender, RoutedEventArgs e)
         {
             if (inodes > 1 && hnodes > 1 && onodes > 1)
             {
                 nn3SO = new nn3S(inodes, hnodes, onodes);
-                MessageBox.Show($"Netzwerk erstellt: Eingänge: {inodes}, Hidden: {hnodes}, Ausgänge: {onodes}, Learningrate: {learningRate}");
+                MessageBox.Show($"Netzwerk erstellt: Eingänge: {inodes} | Hidden: {hnodes} | Ausgänge: {onodes} | Lernrate: {learningRate} | Epochen für das Training: {epoches}");
+                openTrainButton.IsEnabled = true;
+                loadWeightButton.IsEnabled = true;
             }
             else
             {
@@ -158,6 +162,7 @@ namespace NeuralNetwork_WPF
             }
 
             trainOK = true;
+            openTestButton.IsEnabled = true;
             MessageBox.Show("Training done: " + trainCount + " , with " + epoches + " epochs" );
         }
 
@@ -169,6 +174,8 @@ namespace NeuralNetwork_WPF
                 trainFile = openFileDialog.FileName;
                 MessageBox.Show($"Trainingsdatei geladen: {trainFile}");
             }
+
+            if (trainFile != "") trainButton.IsEnabled = true;
         }
 
         public (double[,], double[,]) LoadWeights(string filePath)
@@ -223,7 +230,63 @@ namespace NeuralNetwork_WPF
 
         private void epochenBox_PreviewTextInput(object sender, TextCompositionEventArgs e)
         {
-            e.Handled = !int.TryParse(e.Text, out int epoches);
+            e.Handled = !int.TryParse(e.Text, out _);
+        }
+
+        private void TextBoxHiddenLayerCount_PreviewTextInput(object sender, TextCompositionEventArgs e)
+        {
+            e.Handled = !int.TryParse(e.Text, out _);
+        }
+
+        private void TextBoxHiddenLayerCount_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            int.TryParse(TextBoxHiddenLayerCount.Text, out int parsedHiddenLayerCount);
+            hiddenLayerCount = parsedHiddenLayerCount;
+        }
+
+    private void TextBoxHiddenLayerCount_LostFocus(object sender, RoutedEventArgs e)
+        {
+            TextBox textBox = sender as TextBox;
+            if (textBox.Text == "")
+            {
+                textBox.Text = "1";
+            }
+        }
+
+        private void TextBoxHiddenLayerCount_GotFocus(object sender, RoutedEventArgs e)
+        {
+            TextBox textBox = sender as TextBox;
+            textBox.Text = "";
+        }
+
+        private void epochenBox_GotFocus(object sender, RoutedEventArgs e)
+        {
+            TextBox textBox = sender as TextBox;
+            textBox.Text = "";
+        }
+
+        private void epochenBox_LostFocus(object sender, RoutedEventArgs e)
+        {
+            TextBox textBox = sender as TextBox;
+            if (textBox.Text == "")
+            {
+                textBox.Text = "1";
+            }
+        }
+
+        private void hiddenTextBox_LostFocus(object sender, RoutedEventArgs e)
+        {
+            TextBox textBox = sender as TextBox;
+            if (textBox.Text == "")
+            {
+                textBox.Text = "100";
+            }
+        }
+
+        private void hiddenTextBox_GotFocus(object sender, RoutedEventArgs e)
+        {
+            TextBox textBox = sender as TextBox;
+            textBox.Text = "";
         }
 
         private void loadWeightButton_Click(object sender, RoutedEventArgs e)
@@ -246,6 +309,7 @@ namespace NeuralNetwork_WPF
                     nn3SO.setWihMatrix(loadedWih);
                     nn3SO.setWhoMatrix(loadedWho);
 
+                    openTestButton.IsEnabled = true;
                     MessageBox.Show("Gewichte erfolgreich geladen!", "Erfolg", MessageBoxButton.OK, MessageBoxImage.Information);
                 }
                 else
@@ -291,6 +355,8 @@ namespace NeuralNetwork_WPF
                 testFile = openFileDialog.FileName;
                 MessageBox.Show($"Test Datei geladen: {testFile}");
             }
+
+            if (testFile != "") queryButton.IsEnabled = true;
         }
 
         private void queryButton_Click(object sender, RoutedEventArgs e)

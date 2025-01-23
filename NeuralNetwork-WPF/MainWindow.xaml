@@ -8,17 +8,17 @@
         Title="MainWindow" Height="700" Width="1200">
 
     <Grid>
-        <Button x:Name="queryButton" Content="Query Network" HorizontalAlignment="Left" Margin="833,277,0,0" VerticalAlignment="Top" Width="115" Click="queryButton_Click" Height="32"/>
-        <Button x:Name="trainButton" Content="Train Network" HorizontalAlignment="Left" Margin="1045,131,0,0" VerticalAlignment="Top" Width="121" Height="33" Click="trainButton_Click"/>
+        <Button x:Name="queryButton" Content="Query Network" HorizontalAlignment="Left" Margin="833,277,0,0" VerticalAlignment="Top" Width="115" Click="queryButton_Click" Height="32" IsEnabled="False"/>
+        <Button x:Name="trainButton" Content="Train Network" HorizontalAlignment="Left" Margin="1045,131,0,0" VerticalAlignment="Top" Width="121" Height="33" Click="trainButton_Click" IsEnabled="False"/>
         <Button x:Name="createButton" Content="Create Network" HorizontalAlignment="Left" Margin="832,232,0,0" VerticalAlignment="Top" Width="116" Click="createButton_Click" Height="32"/>
         <TextBox x:Name="outputTextBox" HorizontalAlignment="Left" Height="24" Margin="842,191,0,0" TextWrapping="Wrap" Text="10" VerticalAlignment="Top" Width="98" PreviewTextInput="outputTextBox_PreviewTextInput" IsEnabled="False"/>
-        <TextBox x:Name="hiddenTextBox" HorizontalAlignment="Left" Height="24" Margin="842,139,0,0" TextWrapping="Wrap" Text="100" VerticalAlignment="Top" Width="98" PreviewTextInput="hiddenTextBox_PreviewTextInput"/>
+        <TextBox x:Name="hiddenTextBox" HorizontalAlignment="Left" Height="24" Margin="842,139,0,0" TextWrapping="Wrap" Text="100" VerticalAlignment="Top" Width="57" PreviewTextInput="hiddenTextBox_PreviewTextInput" LostFocus="hiddenTextBox_LostFocus" GotFocus="hiddenTextBox_GotFocus"/>
         <TextBox x:Name="inputTextBox" HorizontalAlignment="Left" Height="24" Margin="842,87,0,0" TextWrapping="Wrap" Text="784" VerticalAlignment="Top" Width="98" PreviewTextInput="inputTextBox_PreviewTextInput" IsEnabled="False"/>
         <TextBox x:Name="TextBox_LearningRate" HorizontalAlignment="Left" Height="24" Margin="842,35,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="98" Text="0.1" TextChanged="TextBox_LearningRate_TextChanged" PreviewTextInput="TextBox_LearningRate_PreviewTextInput" LostFocus="TextBox_LearningRate_LostFocus" GotFocus="TextBox_LearningRate_GotFocus"/>
 
-        <Button x:Name="openTrainButton" Content="Open Training File" HorizontalAlignment="Left" Margin="1045,24,0,0" VerticalAlignment="Top" Width="121" Click="openTrainButton_Click" Height="33"/>
-        <Button x:Name="loadWeightButton" Content="Load Weight Matrices" HorizontalAlignment="Left" Margin="1045,179,0,0" VerticalAlignment="Top" Width="121" Click="loadWeightButton_Click" Height="35" FontSize="11"/>
-        <Button x:Name="openTestButton" Content="Open Test File" HorizontalAlignment="Left" Margin="1045,227,0,0" VerticalAlignment="Top" Width="121" Click="openTestButton_Click" Height="34"/>
+        <Button x:Name="openTrainButton" Content="Open Training File" HorizontalAlignment="Left" Margin="1045,24,0,0" VerticalAlignment="Top" Width="121" Click="openTrainButton_Click" Height="33" IsEnabled="False"/>
+        <Button x:Name="loadWeightButton" Content="Load Weight Matrices" HorizontalAlignment="Left" Margin="1045,179,0,0" VerticalAlignment="Top" Width="121" Click="loadWeightButton_Click" Height="35" FontSize="11" IsEnabled="False"/>
+        <Button x:Name="openTestButton" Content="Open Test File" HorizontalAlignment="Left" Margin="1045,227,0,0" VerticalAlignment="Top" Width="121" Click="openTestButton_Click" Height="34" IsEnabled="False"/>
 
 
         <DataGrid x:Name="networkDataGrid" 
@@ -40,21 +40,22 @@
             </DataGrid.Columns>
         </DataGrid>
 
-        <Label Content="Learning Rate" HorizontalAlignment="Left" Margin="848,14,0,0" VerticalAlignment="Top" RenderTransformOrigin="-0.5,0.615" Height="27" Width="108"/>
-        <Label Content="Input Nodes" HorizontalAlignment="Left" Margin="849,66,0,0" VerticalAlignment="Top" RenderTransformOrigin="-0.5,0.615" Height="27" Width="99"/>
-        <Label Content="Hidden Nodes" HorizontalAlignment="Left" Margin="846,118,0,0" VerticalAlignment="Top" RenderTransformOrigin="-0.5,0.615" Height="27" Width="92"/>
-        <Label Content="Output Nodes" HorizontalAlignment="Left" Margin="846,170,0,0" VerticalAlignment="Top" RenderTransformOrigin="-0.5,0.615" Height="27" Width="112"/>
+        <Label Content="Learning Rate" HorizontalAlignment="Left" Margin="848,13,0,0" VerticalAlignment="Top" RenderTransformOrigin="-0.5,0.615" Height="27" Width="108"/>
+        <Label Content="Input Nodes" HorizontalAlignment="Left" Margin="849,65,0,0" VerticalAlignment="Top" RenderTransformOrigin="-0.5,0.615" Height="27" Width="99"/>
+        <Label Content="Hidden Nodes and Layers&#xD;&#xA;&#xD;&#xA;ayers" HorizontalAlignment="Left" Margin="821,116,0,0" VerticalAlignment="Top" RenderTransformOrigin="-0.5,0.615" Height="27" Width="147"/>
+        <Label Content="Output Nodes" HorizontalAlignment="Left" Margin="846,169,0,0" VerticalAlignment="Top" RenderTransformOrigin="-0.5,0.615" Height="27" Width="112"/>
 
-        <TextBox x:Name="epochenBox" HorizontalAlignment="Left" Height="24" Margin="1058,90,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="98" Text="1" TextChanged="epochenBox_TextChanged" PreviewTextInput="epochenBox_PreviewTextInput" />
-        <Label Content="Epochen" HorizontalAlignment="Left" Margin="1075,69,0,0" VerticalAlignment="Top" RenderTransformOrigin="-0.5,0.615" Height="27" Width="108"/>
+        <TextBox x:Name="epochenBox" HorizontalAlignment="Left" Height="24" Margin="1058,90,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="98" Text="1" TextChanged="epochenBox_TextChanged" PreviewTextInput="epochenBox_PreviewTextInput" GotFocus="epochenBox_GotFocus" LostFocus="epochenBox_LostFocus" />
+        <Label Content="Epochs" HorizontalAlignment="Left" Margin="1077,67,0,0" VerticalAlignment="Top" RenderTransformOrigin="-0.5,0.615" Height="27" Width="108"/>
 
-        <Rectangle Fill="#FFF4F4F5" HorizontalAlignment="Left" Height="237" Margin="849,344,0,0" Stroke="Black" VerticalAlignment="Top" Width="307"/>
-        <Image x:Name="numberImage" RenderOptions.BitmapScalingMode="NearestNeighbor" RenderOptions.EdgeMode="Aliased" MinWidth="100" MinHeight="100" Margin="853,348,42,84"/>
-        <TextBox x:Name="performanceBox" HorizontalAlignment="Left" Height="24" Margin="1057,291,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="98" TextChanged="TextBox_LearningRate_TextChanged" PreviewTextInput="TextBox_LearningRate_PreviewTextInput" LostFocus="TextBox_LearningRate_LostFocus" GotFocus="TextBox_LearningRate_GotFocus" IsEnabled="False"/>
-        <Label Content="Network Performance" HorizontalAlignment="Left" Margin="1044,270,0,0" VerticalAlignment="Top" RenderTransformOrigin="-0.5,0.615" Height="27" Width="131"/>
+        <Rectangle Fill="#FFF4F4F5" HorizontalAlignment="Left" Height="245" Margin="849,339,0,0" Stroke="Black" VerticalAlignment="Top" Width="307"/>
+        <Image x:Name="numberImage" RenderOptions.BitmapScalingMode="NearestNeighbor" RenderOptions.EdgeMode="Aliased" MinWidth="100" MinHeight="100" Margin="853,347,42,85"/>
+        <TextBox x:Name="performanceBox" HorizontalAlignment="Left" Height="24" Margin="1057,291,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="98" TextChanged="TextBox_LearningRate_TextChanged" PreviewTextInput="TextBox_LearningRate_PreviewTextInput" LostFocus="TextBox_LearningRate_LostFocus" GotFocus="TextBox_LearningRate_GotFocus"/>
+        <Label Content="Network Performance" HorizontalAlignment="Left" Margin="1044,268,0,0" VerticalAlignment="Top" RenderTransformOrigin="-0.5,0.615" Height="27" Width="131"/>
         <CheckBox x:Name="checkBoxImage" Content="ShowImages" HorizontalAlignment="Left" Margin="851,593,0,0" VerticalAlignment="Top" Height="19" Width="97"/>
         <TextBox x:Name="recognizedBox" HorizontalAlignment="Left" Height="23" Margin="1058,589,0,0" TextWrapping="Wrap" Text="?" VerticalAlignment="Top" Width="92"/>
         <Label Content="Recognized" HorizontalAlignment="Left" Margin="1067,607,0,0" VerticalAlignment="Top" RenderTransformOrigin="-0.5,0.615"/>
+        <TextBox x:Name="TextBoxHiddenLayerCount" HorizontalAlignment="Left" Height="25" Margin="904,138,0,0" TextWrapping="Wrap" Text="1" VerticalAlignment="Top" Width="36" PreviewTextInput="TextBoxHiddenLayerCount_PreviewTextInput" TextChanged="TextBoxHiddenLayerCount_TextChanged" LostFocus="TextBoxHiddenLayerCount_LostFocus" GotFocus="TextBoxHiddenLayerCount_GotFocus"/>
 
 
 
