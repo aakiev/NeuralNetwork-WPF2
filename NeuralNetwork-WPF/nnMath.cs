@@ -4,21 +4,46 @@ namespace NeuralNetwork_WPF
 {
     public class nnMath
     {
-        // Method for matrix multiplication
-        public double[] matrixMult(double[,] matrix, int columns, double[] vector)
+        // Methods for matrix multiplication
+        public double[,] matrixMult(double[,] matrixA, double[,] matrixB)
         {
-            int rows = matrix.GetLength(0); // Number of rows in the matrix
+            if (matrixA.GetLength(1) != matrixB.GetLength(0))
+                throw new ArgumentException("Matrix A columns must match Matrix B rows.");
+
+            int rows = matrixA.GetLength(0);
+            int cols = matrixB.GetLength(1);
+            int sharedDim = matrixA.GetLength(1);
+
+            double[,] result = new double[rows, cols];
+
+            for (int i = 0; i < rows; i++)
+            {
+                for (int j = 0; j < cols; j++)
+                {
+                    for (int k = 0; k < sharedDim; k++)
+                    {
+                        result[i, j] += matrixA[i, k] * matrixB[k, j];
+                    }
+                }
+            }
+            return result;
+        }
+
+        public double[] matrixMult(double[,] matrix, double[] vector)
+        {
+            if (matrix.GetLength(1) != vector.Length)
+                throw new ArgumentException("Matrix columns must match vector length.");
+
+            int rows = matrix.GetLength(0);
             double[] result = new double[rows];
 
             for (int i = 0; i < rows; i++)
             {
-                result[i] = 0;
-                for (int j = 0; j < columns; j++)
+                for (int j = 0; j < vector.Length; j++)
                 {
-                    result[i] += matrix[j, i] * vector[j];
+                    result[i] += matrix[i, j] * vector[j];
                 }
             }
-
             return result;
         }
 
@@ -33,28 +58,14 @@ namespace NeuralNetwork_WPF
             return outputs;
         }
 
-        // Cost-Function als quadratischen Fehler mit Vorzeichen
+        // Cost-Function als einfache Differenz
         public double[] CalculateOutputErrors(double[] targets, double[] outputs)
         {
-            double[] test = new double[targets.Length];
             double[] errors = new double[targets.Length];
-            int a;
             
             for (int i = 0; i < targets.Length; i++)
             {
-                test[i] = targets[i] - outputs[i];
-
-                if (test[i] < 0)
-                {
-                    a = -1; 
-                }
-                else
-                {
-                    a = 1; 
-
-                }
-
-                errors[i] = a*Math.Pow(targets[i] - outputs[i],2);
+                errors[i] = targets[i] - outputs[i];
             }
             return errors;
 
@@ -63,27 +74,31 @@ namespace NeuralNetwork_WPF
         // Fehler-Funktion für den Hidden Layer
         public double[] CalculateHiddenError(double[,] weights, double[] errorOutput)
         {
+            if (weights == null)
+                throw new ArgumentNullException(nameof(weights), "Die Gewichts-Matrix darf nicht null sein.");
+            if (errorOutput == null)
+                throw new ArgumentNullException(nameof(errorOutput), "Der Fehler-Array darf nicht null sein.");
+
             int rows = weights.GetLength(0); // Anzahl der Neuronen in der Hidden-Schicht
             int cols = weights.GetLength(1); // Anzahl der Neuronen in der Output-Schicht
 
-            if (cols != errorOutput.Length)
-            {
-                throw new ArgumentException("Die Anzahl der Spalten der Gewichtsmatrix muss der Länge des Fehlervektors entsprechen.");
-            }
+            if (rows != errorOutput.Length)
+                throw new ArgumentException("Die Anzahl der Spalten in der Gewichtsmatrix muss der Länge des Fehlervektors entsprechen.");
 
-            double[] errorHidden = new double[rows];
+            double[] errorHidden = new double[cols];
 
-            for (int i = 0; i < rows; i++)
+            for (int i = 0; i < cols; i++)
             {
                 errorHidden[i] = 0.0;
-                for (int j = 0; j < cols; j++)
+                for (int j = 0; j < errorOutput.Length; j++)
                 {
-                    errorHidden[i] += weights[i, j] * errorOutput[j];
+                    errorHidden[i] += weights[j, i] * errorOutput[j];
                 }
             }
 
             return errorHidden;
-
         }
+
+
     }
 }
