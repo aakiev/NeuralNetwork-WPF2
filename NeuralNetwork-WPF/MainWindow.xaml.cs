@@ -34,7 +34,7 @@ namespace NeuralNetwork_WPF
         double[] targets;
 
         string trainFile, testFile, weightFile;
-        Boolean trainOK = false;
+        bool isDigit = true;
 
         public MainWindow()
         {
@@ -95,6 +95,17 @@ namespace NeuralNetwork_WPF
         }
         private void createButton_Click(object sender, RoutedEventArgs e)
         {
+            MessageBoxResult result = MessageBox.Show("Do you want to train the network with digits?\nChoose NO if you want to train with clothing pieces.", "Choose Datatype",MessageBoxButton.YesNo, MessageBoxImage.Question);
+
+            if (result == MessageBoxResult.Yes)
+            {
+                isDigit = true;
+            }
+            else
+            {
+                isDigit = false;
+            }
+
             if (inodes > 1 && hnodes > 1 && onodes > 1)
             {
                 if (hiddenLayerCount == 1)
@@ -280,7 +291,6 @@ namespace NeuralNetwork_WPF
                 }
             }
 
-            trainOK = true;
             openTestButton.IsEnabled = true;
             MessageBox.Show("Training abgeschlossen: " + trainCount + " Trainingsdurchläufe, " + epoches + " Epochen");
         }
@@ -725,7 +735,31 @@ namespace NeuralNetwork_WPF
                 }
             }
 
-            recognizedBox.Text = indexMax.ToString();
+            if (isDigit == false)
+            {
+
+                switch (indexMax)
+                {
+                    case 0: recognizedBox.Text = "T-Shirt/Top"; break;
+                    case 1: recognizedBox.Text = "Trouser"; break;
+                    case 2: recognizedBox.Text = "Pullover"; break;
+                    case 3: recognizedBox.Text = "Dress"; break;
+                    case 4: recognizedBox.Text = "Coat"; break;
+                    case 5: recognizedBox.Text = "Sandal"; break;
+                    case 6: recognizedBox.Text = "Shirt"; break;
+                    case 7: recognizedBox.Text = "Sneaker"; break;
+                    case 8: recognizedBox.Text = "Bag"; break;
+                    case 9: recognizedBox.Text = "Ankle Boot"; break;
+
+                    default: break;
+                }
+            }
+            else
+            {
+                recognizedBox.Text = indexMax.ToString();
+            }
+
+            
         }
     }
 }

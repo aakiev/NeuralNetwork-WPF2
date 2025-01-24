@@ -52,7 +52,7 @@
         <Image x:Name="numberImage" RenderOptions.BitmapScalingMode="NearestNeighbor" RenderOptions.EdgeMode="Aliased" MinWidth="100" MinHeight="100" Margin="853,347,42,85"/>
         <TextBox x:Name="performanceBox" HorizontalAlignment="Left" Height="24" Margin="1057,291,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="98" TextChanged="TextBox_LearningRate_TextChanged" PreviewTextInput="TextBox_LearningRate_PreviewTextInput" LostFocus="TextBox_LearningRate_LostFocus" GotFocus="TextBox_LearningRate_GotFocus"/>
         <Label Content="Network Performance" HorizontalAlignment="Left" Margin="1044,268,0,0" VerticalAlignment="Top" RenderTransformOrigin="-0.5,0.615" Height="27" Width="131"/>
-        <CheckBox x:Name="checkBoxImage" Content="ShowImages" HorizontalAlignment="Left" Margin="851,593,0,0" VerticalAlignment="Top" Height="19" Width="97"/>
+        <CheckBox x:Name="checkBoxImage" Content="Show Images" HorizontalAlignment="Left" Margin="851,593,0,0" VerticalAlignment="Top" Height="19" Width="97"/>
         <TextBox x:Name="recognizedBox" HorizontalAlignment="Left" Height="23" Margin="1058,589,0,0" TextWrapping="Wrap" Text="?" VerticalAlignment="Top" Width="92"/>
         <Label Content="Recognized" HorizontalAlignment="Left" Margin="1067,607,0,0" VerticalAlignment="Top" RenderTransformOrigin="-0.5,0.615"/>
         <ComboBox x:Name="ComboBoxHiddenLayers" HorizontalAlignment="Left" Margin="904,139,0,0" VerticalAlignment="Top" Width="52" Height="24" SelectedIndex="0" SelectionChanged="ComboBoxHiddenLayers_SelectionChanged">
