@@ -74,16 +74,8 @@ namespace NeuralNetwork_WPF
         // Fehler-Funktion für den Hidden Layer
         public double[] CalculateHiddenError(double[,] weights, double[] errorOutput)
         {
-            if (weights == null)
-                throw new ArgumentNullException(nameof(weights), "Die Gewichts-Matrix darf nicht null sein.");
-            if (errorOutput == null)
-                throw new ArgumentNullException(nameof(errorOutput), "Der Fehler-Array darf nicht null sein.");
-
             int rows = weights.GetLength(0); // Anzahl der Neuronen in der Hidden-Schicht
             int cols = weights.GetLength(1); // Anzahl der Neuronen in der Output-Schicht
-
-            if (rows != errorOutput.Length)
-                throw new ArgumentException("Die Anzahl der Spalten in der Gewichtsmatrix muss der Länge des Fehlervektors entsprechen.");
 
             double[] errorHidden = new double[cols];
 

@@ -12,7 +12,7 @@
         <Button x:Name="trainButton" Content="Train Network" HorizontalAlignment="Left" Margin="1045,131,0,0" VerticalAlignment="Top" Width="121" Height="33" Click="trainButton_Click" IsEnabled="False"/>
         <Button x:Name="createButton" Content="Create Network" HorizontalAlignment="Left" Margin="832,232,0,0" VerticalAlignment="Top" Width="116" Click="createButton_Click" Height="32"/>
         <TextBox x:Name="outputTextBox" HorizontalAlignment="Left" Height="24" Margin="842,191,0,0" TextWrapping="Wrap" Text="10" VerticalAlignment="Top" Width="98" PreviewTextInput="outputTextBox_PreviewTextInput" IsEnabled="False"/>
-        <TextBox x:Name="hiddenTextBox" HorizontalAlignment="Left" Height="24" Margin="842,139,0,0" TextWrapping="Wrap" Text="100" VerticalAlignment="Top" Width="57" PreviewTextInput="hiddenTextBox_PreviewTextInput" LostFocus="hiddenTextBox_LostFocus" GotFocus="hiddenTextBox_GotFocus"/>
+        <TextBox x:Name="hiddenTextBox" HorizontalAlignment="Left" Height="24" Margin="833,139,0,0" TextWrapping="Wrap" Text="100" VerticalAlignment="Top" Width="66" PreviewTextInput="hiddenTextBox_PreviewTextInput" LostFocus="hiddenTextBox_LostFocus" GotFocus="hiddenTextBox_GotFocus" TextChanged="hiddenTextBox_TextChanged"/>
         <TextBox x:Name="inputTextBox" HorizontalAlignment="Left" Height="24" Margin="842,87,0,0" TextWrapping="Wrap" Text="784" VerticalAlignment="Top" Width="98" PreviewTextInput="inputTextBox_PreviewTextInput" IsEnabled="False"/>
         <TextBox x:Name="TextBox_LearningRate" HorizontalAlignment="Left" Height="24" Margin="842,35,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="98" Text="0.1" TextChanged="TextBox_LearningRate_TextChanged" PreviewTextInput="TextBox_LearningRate_PreviewTextInput" LostFocus="TextBox_LearningRate_LostFocus" GotFocus="TextBox_LearningRate_GotFocus"/>
 
@@ -55,7 +55,11 @@
         <CheckBox x:Name="checkBoxImage" Content="ShowImages" HorizontalAlignment="Left" Margin="851,593,0,0" VerticalAlignment="Top" Height="19" Width="97"/>
         <TextBox x:Name="recognizedBox" HorizontalAlignment="Left" Height="23" Margin="1058,589,0,0" TextWrapping="Wrap" Text="?" VerticalAlignment="Top" Width="92"/>
         <Label Content="Recognized" HorizontalAlignment="Left" Margin="1067,607,0,0" VerticalAlignment="Top" RenderTransformOrigin="-0.5,0.615"/>
-        <TextBox x:Name="TextBoxHiddenLayerCount" HorizontalAlignment="Left" Height="25" Margin="904,138,0,0" TextWrapping="Wrap" Text="1" VerticalAlignment="Top" Width="36" PreviewTextInput="TextBoxHiddenLayerCount_PreviewTextInput" TextChanged="TextBoxHiddenLayerCount_TextChanged" LostFocus="TextBoxHiddenLayerCount_LostFocus" GotFocus="TextBoxHiddenLayerCount_GotFocus"/>
+        <ComboBox x:Name="ComboBoxHiddenLayers" HorizontalAlignment="Left" Margin="904,139,0,0" VerticalAlignment="Top" Width="52" Height="24" SelectedIndex="0" SelectionChanged="ComboBoxHiddenLayers_SelectionChanged">
+            <ComboBoxItem Content="1"/>
+            <ComboBoxItem Content="2"/>
+            <ComboBoxItem Content="3"/>
+        </ComboBox>
 
 
 

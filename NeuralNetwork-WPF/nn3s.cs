@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace NeuralNetwork_WPF
 {
-    class nn3S  //Neural Network 3 Layers
+    public class nn3S  //Neural Network 3 Layers
     {
         double[,] wih, who;
         int inodes, hnodes, onodes;
